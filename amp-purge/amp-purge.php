@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AMP CACHE Purge
-Plugin URI: https://github.com/lmartinezs/wp-plugins/
+Plugin URI: https://github.com/lmartinezs/wp-plugins
 Description: Purge AMP Cache on Update Post.
 Version: 1.0.0
 Author: Lázaro M
