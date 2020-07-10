@@ -1,11 +1,9 @@
 pipeline { 
     agent any 
+    environment {
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+    }
     stages {
-        stage('Checkout Repo') { 
-            steps { 
-                checkout scm
-            }
-        }
         stage('Test'){
             steps {
                echo "TEST"
@@ -14,17 +12,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'git status'
-                script{
-                    echo "BRANCH::: "
-                    echo env.BRANCH_NAME
-                    switch(env.BRANCH_NAME){
+                script{                    
+                    echo BRANCH_NAME
+                    switch(BRANCH_NAME){
                         case "master":
+                            echo "branch-master"
                             break;
                         case "staging":
-                            
+                            echo "staging"
                             break;
-                        default:
-                            echo "skipping";
+                        default:                            
                             break;
                         
                     }
