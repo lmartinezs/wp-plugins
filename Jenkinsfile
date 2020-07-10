@@ -16,6 +16,7 @@ pipeline {
                     echo BRANCH_NAME
                     switch(BRANCH_NAME){
                         case "master":
+                            echo "branch-master"
                             break;
                         case "staging":
                             echo "staging"
