@@ -1,3 +1,4 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
 <project name="name-of-project" default="full-build">
 <!--  By default, we assume all tools to be on the $PATH  -->
 <property name="pdepend" value="pdepend"/>
@@ -23,11 +24,11 @@
  <property name="phploc"  value="${basedir}/vendor/bin/phploc"/>
  <property name="phpmd"   value="${basedir}/vendor/bin/phpmd"/>
  <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/>  -->
-<target name="full-build" depends="prepare,phpunit,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
-<target name="full-build-parallel" depends="prepare,phpunit,phpdox,-check-failure" description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
+<target name="full-build" depends="prepare,static-analysis,phpunit,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
+<target name="full-build-parallel" depends="prepare,static-analysis-parallel,phpunit,phpdox,-check-failure" description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
 <target name="quick-build" depends="prepare,lint,phpunit-no-coverage" description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
 <target name="static-analysis" depends="lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci" description="Performs static analysis"/>
-<!--  Adjust the threadCount attribute's value to the number of CPUs 
+<!--  Adjust the threadCount attribute's value to the number of CPUs  -->
 <target name="static-analysis-parallel" description="Performs static analysis (executing the tools in parallel)">
 <parallel threadCount="2">
 <sequential>
@@ -39,7 +40,7 @@
 <antcall target="phpcs-ci"/>
 <antcall target="phploc-ci"/>
 </parallel>
-</target>-->
+</target>
 <target name="clean" unless="clean.done" description="Cleanup build artifacts">
 <delete dir="${basedir}/build/api"/>
 <delete dir="${basedir}/build/coverage"/>
@@ -73,28 +74,24 @@
 </exec>
 <property name="phploc.done" value="true"/>
 </target>
-<!-- disable phploc-ci  
 <target name="phploc-ci" unless="phploc.done" depends="prepare" description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
 <exec executable="${phploc}" taskname="phploc">
-<arg value="-count-tests"/>
-<arg value="-log-csv"/>
 <arg path="${basedir}/build/logs/phploc.csv"/>
-<arg value="-log-xml"/>
+<arg value="--log-xml"/>
 <arg path="${basedir}/build/logs/phploc.xml"/>
 <arg path="${basedir}/amp-purge"/>
 </exec>
 <property name="phploc.done" value="true"/>
-</target>-->
-<!-- diable pdepend
+</target>
 <target name="pdepend" unless="pdepend.done" depends="prepare" description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
 <exec executable="${pdepend}" taskname="pdepend">
-<arg value="-jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
-<arg value="-jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
-<arg value="-overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
-<arg path="${basedir}/src"/>
+<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
+<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
+<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
+<arg path="${basedir}/amp-purge"/>
 </exec>
 <property name="pdepend.done" value="true"/>
-</target>-->
+</target>
 <target name="phpmd" unless="phpmd.done" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
 <exec executable="${phpmd}" taskname="phpmd">
 <arg path="${basedir}/amp-purge"/>
@@ -118,7 +115,7 @@
 <arg value="--standard=PSR2"/>
 <arg value="--extensions=php"/>
 <arg value="--ignore=autoload.php"/>
-<arg path="${basedir}/amp-purge"/>
+<arg path="${basedir}/src"/>
 </exec>
 <property name="phpcs.done" value="true"/>
 </target>
