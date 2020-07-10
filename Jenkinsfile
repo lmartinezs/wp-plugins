@@ -14,7 +14,7 @@ pipeline {
                 sh 'git status'
                 script{
                     echo "BRANCH::: "
-                    echo ${BRANCH_NAME}
+                    echo BRANCH_NAME
                     switch(env.BRANCH_NAME){
                         case "master":
                             break;
