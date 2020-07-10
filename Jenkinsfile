@@ -1,5 +1,8 @@
 pipeline { 
     agent any 
+    environment {
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+    }
     stages {
         stage('Test'){
             steps {
@@ -11,7 +14,7 @@ pipeline {
                 sh 'git status'
                 script{
                     echo "BRANCH::: "
-                    echo env.BRANCH_NAME
+                    echo ${BRANCH_NAME}
                     switch(env.BRANCH_NAME){
                         case "master":
                             break;
