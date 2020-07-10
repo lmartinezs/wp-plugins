@@ -1,11 +1,6 @@
 pipeline { 
     agent any 
     stages {
-        stage('Checkout Repo') { 
-            steps { 
-                checkout scm
-            }
-        }
         stage('Test'){
             steps {
                echo "TEST"
