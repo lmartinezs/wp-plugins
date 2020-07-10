@@ -12,17 +12,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'git status'
-                script{
-                    echo "BRANCH::: "
+                script{                    
                     echo BRANCH_NAME
-                    switch(env.BRANCH_NAME){
+                    switch(BRANCH_NAME){
                         case "master":
                             break;
                         case "staging":
-                            
+                            echo "staging"
                             break;
-                        default:
-                            echo "skipping";
+                        default:                            
                             break;
                         
                     }
