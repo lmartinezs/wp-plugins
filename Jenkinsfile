@@ -20,6 +20,8 @@ pipeline {
                             break;
                         case "staging":
                             echo "staging"
+                            echo FTP_USER
+                            echo FTP_PWD
                             break;
                         default:                            
                             break;
