@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: AMP CACHE Purge
-Plugin URI: https://github.com/lmartinezs/wp-plugins
+Plugin URI: http://televisa.com
 Description: Purge AMP Cache on Update Post.
-Version: 1.0.0
+Version: 1.1.0
 Author: Lázaro M
 AuthorURI: https://amp.dev/documentation/examples/guides/using_the_google_amp_cache/
 */
@@ -36,6 +36,11 @@ class AMP_Cache_Purge
         //Panel Admin
         add_action('admin_menu', array( $this,'amp_cache_purge_options'));
         add_action( 'admin_init', array( $this,'amp_cache_purge_settings' ));
+        add_filter( 'purge_amp_cache_filter', array( $this,'purge_amp_cache_filter_callback'), 10, 1 );
+
+        add_filter( 'purge_amp_cache_filter_url', array( $this,'purge_amp_cache_filter_url_callback'), 10, 1 );
+
+        
         
 		//add_action		( 'admin_enqueue_scripts',				array( $this, 'admin_scripts'			)			);
 		//add_action		( 'do_meta_boxes',						array( $this, 'create_metaboxes'		),	10,	2	);
@@ -44,6 +49,12 @@ class AMP_Cache_Purge
 		// front end
 		//add_action		( 'wp_enqueue_scripts',					array( $this, 'front_scripts'			),	10		);
 		//add_filter		( 'comment_form_defaults',				array( $this, 'custom_notes_filter'		) 			);
+    }
+
+    function purge_amp_cache_filter_callback($post_id){
+        if($post_id != ''){            
+            $this->update_cache($post_id);
+        }        
     }
 
     function amp_cache_purge_options() {
@@ -74,6 +85,21 @@ class AMP_Cache_Purge
 			do_settings_sections( 'amp-cache-purge-settings-group' );
 			
 			if(isset($_POST) && !empty($_POST)){
+
+                if(isset($_POST["amp_cache_purge_post_types"])){
+                    if(!empty($_POST["amp_cache_purge_post_types"])){
+                        $json = json_encode($_POST["amp_cache_purge_post_types"]);
+                        //echo $json;
+                        //$types = implode(',',$_POST["amp_cache_purge_post_types"]);
+                        update_option('amp_cache_purge_post_types',$json);
+                        //print_r($types);die;
+                    }                   
+                }else{
+                    
+                        update_option('amp_cache_purge_post_types','');
+                    
+                }
+
 				
 				if(isset($_POST["amp_cache_purge_private_key"])){
 					if(get_option('amp_cache_purge_private_key')!=$_POST["amp_cache_purge_private_key"]){
@@ -97,11 +123,12 @@ class AMP_Cache_Purge
             ?>
 
                 <table class="form-table">
+                
                     <tr>
                     <th scope="row">Private Key:</th>
                     <td><input type="text" name="amp_cache_purge_private_key" value="<?php echo esc_attr( get_option('amp_cache_purge_private_key') ); ?>" /></td>
                     </tr>
-                    
+                   
                     <tr>
                     <th scope="row">Domain:</th>
                     <td><input type="text" name="amp_cache_purge_domain" value="<?php echo esc_attr( get_option('amp_cache_purge_domain') ); ?>" /></td>
@@ -110,6 +137,40 @@ class AMP_Cache_Purge
                     <tr>
 						<th colspan=2 scope="row"><input type="checkbox" name="amp_cache_purge_activate_log" value="activado" <?php if( esc_attr( get_option('amp_cache_purge_activate_log') ) == "activado") echo "checked";  ?> > Enable Logs</th>
 					</tr>
+
+                    <tr>
+                    <th scope="row">Post Types:</th>
+                    <td>
+                    <?php 
+                        $args=array(
+                            'public'   => true,
+                            '_builtin' => false
+                            );
+                        $output = 'names';$operator = 'and';
+                        $post_types_custom =get_post_types($args,$output,$operator);
+                        $args=array(
+                            'public'   => true,
+                            '_builtin' => true
+                            );
+                        $output = 'names';$operator = 'and';
+                        $post_types_default =get_post_types($args,$output,$operator);
+                        $post_types = array_merge($post_types_default, $post_types_custom);                    
+                        $current_types = strval(get_option('amp_cache_purge_post_types'));                   
+                            foreach ($post_types  as $post_type ) {
+                                if($current_types != ''){     
+                                    $json = json_decode( $current_types,true); 
+                                    if (in_array($post_type, $json)) {?>
+                                        <input type="checkbox" name="amp_cache_purge_post_types[]" value='<?php echo $post_type; ?>' checked><?php echo $post_type; ?><br>
+                                    <?php }else{?>
+                                        <input type="checkbox" name="amp_cache_purge_post_types[]" value='<?php echo $post_type; ?>'><?php echo $post_type; ?><br>
+                                    <?php }
+                                }else{?>
+                                     <input type="checkbox" name="amp_cache_purge_post_types[]" value='<?php echo $post_type; ?>'><?php echo $post_type; ?><br>
+                                <?php }                                
+                            }
+                        ?>
+                        </td>
+                    </tr>
 
                     <tr>
                     <th scope="row">To create public-key.pub:</th>
@@ -127,32 +188,73 @@ class AMP_Cache_Purge
     <?php
 
     }
-
-
     //
     function check_if_draft($new_status, $old_status, $post){
-        if($old_status == 'publish' && $new_status == 'draft' && ($post->post_type == 'page' || $post->post_type == 'post')){
-            $this->update_cache($post->id);
+        $current_types = strval(get_option('amp_cache_purge_post_types')); 
+        if($current_types != ''){     
+            $json = json_decode( $current_types,true); 
+            if($old_status == 'publish' && $new_status == 'draft' && in_array($post->post_type, $json)){
+                $this->update_cache($post->id);
+            }
         }
     }
 
     // Listen for publishing of a post
     function send_new_post($post_id,$post){
-        if($post->post_status == 'publish' && $post->post_type == 'post') {
-            $this->update_cache($post_id);
-        }
+        $current_types = strval(get_option('amp_cache_purge_post_types')); 
+        if($current_types != ''){     
+            $json = json_decode( $current_types,true); 
+            if ($post->post_status == 'publish' && in_array($post->post_type, $json)) {
+                $this->update_cache($post_id);
+            }   
+        }      
     }
 
 
     // Listen for deleting of a post
     function send_delete_post($post_id){
-        //echo "deleting";
-        if($post_status == 'publish' && ($post_type == 'post' || $post_type == 'page')) {
-            $this->update_cache($post_id);
+        
+        $current_types = strval(get_option('amp_cache_purge_post_types')); 
+        if($current_types != ''){     
+            $json = json_decode( $current_types,true); 
+            if($post_status == 'publish' && in_array($post->post_type, $json)){
+                $this->update_cache($post_id);
+            }
+        }
+    }
+
+    function purge_amp_cache_filter_url_callback($url){
+        $private_key = get_option('amp_cache_purge_private_key');
+        $domain = get_option('amp_cache_purge_domain');
+        if($private_key !== '' && $domain!==''){
+            if($url !== ''){                
+                $parse = parse_url($url);
+                if(!isset($parse["host"])){
+                    $url = home_url() . $url;
+                }
+
+                $urls = [$url];
+            
+                $cache = new Lib\IVS_AMP_CACHE_UPDATE(
+                    $domain,
+                    $urls,
+                    $private_key);
+                
+                $cache_response = $cache->update(false);                
+                $response = wp_remote_get( esc_url_raw( $cache_response[0] ) );
+          
+                $api_response = wp_remote_retrieve_body( $response );
+                //prin_r($api_response);die;
+
+                if(get_option('amp_cache_purge_activate_log') == "activado"){
+                    $this->inLogAk(date('l jS \of F Y h:i:s A')." url: ".$cache_response[0]."\n RESPONSE: ".$api_response." \n");
+                }
+            }
         }
     }
 
     function update_cache($post_id){
+        
         $private_key = get_option('amp_cache_purge_private_key');
         $domain = get_option('amp_cache_purge_domain');
         if($private_key !== '' && $domain!==''){
