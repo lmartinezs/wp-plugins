@@ -1,0 +1,261 @@
+# Copyright (C) 2020 Chris Andrews
+# This file is distributed under the same license as the GN Publisher plugin.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: GN Publisher 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gn-publisher\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-11-29 20:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: gn-publisher\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+#: templates/settings.php:204
+msgid "\"Missing Images\""
+msgstr ""
+#: templates/settings.php:212
+msgid "\"Missing Media\""
+msgstr ""
+#: templates/settings.php:142
+msgid "(if testing, refresh this page for most recent fetch time)"
+msgstr ""
+#: templates/settings.php:160
+msgid "(if testing, refresh this page for most recent ping time)"
+msgstr ""
+#: templates/settings.php:94
+msgid ""
+"After the initial setup, GN Publisher will ping Google with an alert each "
+"time your feed is updated."
+msgstr ""
+#: templates/settings.php:229
+#, php-format
+msgid ""
+"Be aware that Google has certain <a href=\"%1$s\">Content Policies</a> for "
+"sites included on Google News properties. More information about applying is "
+"available on the <a href=\"%2$s\">Google News Publisher Help Center</a>."
+msgstr ""
+#: templates/settings.php:92
+msgid ""
+"Be sure to click that blue \"Save\" button in the upper right hand corner of "
+"the Publisher Center to save your changes (it's surprisingly easy to miss). "
+"After saving, wait ten minutes for Google to fetch your feed and render your "
+"articles. Then reload the entire page using your browser's reload/refresh "
+"button before checking to see if your articles appear in the Publisher "
+"Center."
+msgstr ""
+#: templates/settings.php:237
+msgid ""
+"Because of the huge number of ways that publishers, plugins, and themes can "
+"manipulate WordPress posts, I can't guarantee that this plugin will result "
+"in the technical requirements being met."
+msgstr ""
+#: templates/settings.php:63
+msgid "Cached RSS feeds causing slow updating"
+msgstr ""
+#. Author of the plugin
+msgid "Chris Andrews"
+msgstr ""
+#: templates/settings.php:64
+msgid "Delayed crawling by Google"
+msgstr ""
+#: templates/settings.php:59
+msgid "Duplicate images"
+msgstr ""
+#: templates/settings.php:67
+msgid "Feed URLs"
+msgstr ""
+#: templates/settings.php:242
+msgid "Free"
+msgstr ""
+#: templates/settings.php:224
+msgid "General Info"
+msgstr ""
+#. Name of the plugin
+#: controllers/admin/class-gnpub-menu.php:35
+msgid "GN Publisher"
+msgstr ""
+#: templates/settings.php:49
+#, php-format
+msgid ""
+"GN Publisher is a WordPress plugin designed to output RSS feeds that comply "
+"with the <a href=\"%1$s\">Google News RSS Feed Technical Requirements</a> "
+"for inclusion in the <a href=\"%2$s\">Google News Publisher Center</a>."
+msgstr ""
+#: templates/settings.php:9 controllers/admin/class-gnpub-menu.php:34
+msgid "GN Publisher Settings"
+msgstr ""
+#: controllers/admin/class-gnpub-settings.php:51
+msgid "GN Publisher settings saved."
+msgstr ""
+#: controllers/admin/class-gnpub-settings.php:35
+msgid ""
+"GN Publisher settings were not saved because the form has expired. Try again."
+msgstr ""
+#. Description of the plugin
+msgid ""
+"GN Publisher: The easy way to make Google News Publisher compatible RSS "
+"feeds."
+msgstr ""
+#: templates/settings.php:40
+msgid ""
+"Hi,</p><p style=\"font-size:110%;\"> I'm Chris Andrews, a Platinum Level "
+"Product Expert on the <a href=\"%1$s\">Google News Publisher Help forum</a>, "
+"the creator of <a href=\"%2$s\">GN Publisher</a>, and the owner of <a "
+"href=\"%3$s\">Andrews Consulting</a>.</p>"
+msgstr ""
+#. Author URI of the plugin
+msgid "https://andrews.com"
+msgstr ""
+#. URI of the plugin
+msgid "https://andrews.com/gn-publisher"
+msgstr ""
+#: templates/settings.php:267
+msgid ""
+"I work with a small number of news publishers on a year-round basis. My "
+"consulting focuses on discoverability and optimization for surfacing on "
+"Google News, Newsstand, Top Stories, Discover, Articles for You, and other "
+"Google related (and emerging) properties. Consultations include regular "
+"technical SEO audits, advice on content and readership development, a "
+"quarterly newsletter with advice, recommendations and updates on what's "
+"going on with Google News and related properties and how to best use them to "
+"gain more exposure."
+msgstr ""
+#: templates/settings.php:179
+#, php-format
+msgid ""
+"If there are articles and the feed is being fetched, try running your url "
+"through the <a href=\"%1$s\">RSS Feed Validator</a>. The feed will need to "
+"successfully validate with no html errors."
+msgstr ""
+#: templates/settings.php:110
+msgid ""
+"If you are getting the dreaded \"There are no articles in this section\" "
+"message in the Publisher Center:"
+msgstr ""
+#: templates/settings.php:253
+#, php-format
+msgid ""
+"If you need general help as a Google News publisher, or help with the Google "
+"News Publisher Center, please ask for help in the official <a href=\"%1$s\">"
+"Google News Publisher Help Forum</a>. I or some of the other regulars on the "
+"forum will try to help."
+msgstr ""
+#: templates/settings.php:246
+#, php-format
+msgid ""
+"If you need help with the GN Publisher plugin or anything related to the RSS "
+"feeds that are created, please ask on the official <a href=\"%1$s\">"
+"WordPress GN Publisher plugin support forum</a>."
+msgstr ""
+#: templates/settings.php:58
+msgid "Incomplete articles"
+msgstr ""
+#: templates/settings.php:61
+msgid "Missing content (usually social media/Instagram embeds)"
+msgstr ""
+#: templates/settings.php:60
+msgid "Missing images or media"
+msgstr ""
+#: templates/settings.php:141
+msgid "Most Recent Feedfetcher Fetch: "
+msgstr ""
+#: templates/settings.php:159
+msgid "Most Recent Update Ping Sent: "
+msgstr ""
+#: templates/settings.php:142 templates/settings.php:160
+msgid "None recorded."
+msgstr ""
+#: templates/settings.php:209
+msgid ""
+"Note - the Publisher Center preview pane can only display .jpg and .png "
+"image files. If you are using a CDN like CloudFlare or KeyCDN, even if you "
+"have the images set up correctly, the CDN may serve them as WebP files. That "
+"will cause the images to not be displayed, or be displayed inconsistently, "
+"in the preview pane. If you are experiencing this, go the the \"Review and "
+"Publish\" tab in the Publisher Center, subscribe to your publication if you "
+"haven't already, and then click on link for your publication and make sure "
+"the images are displayed correctly there. If they are displayed on your "
+"publication in Google News, you can ignore them not being in the preview "
+"pane."
+msgstr ""
+#: templates/settings.php:69
+msgid ""
+"Once installed and activated, you can find your GN Publisher RSS feeds at:"
+msgstr ""
+#: templates/settings.php:265
+msgid "Private Consulting"
+msgstr ""
+#: templates/settings.php:108
+msgid "Publisher Center says \"There are no articles in this section\""
+msgstr ""
+#: templates/settings.php:106
+msgid "Publisher Center Troubleshooting"
+msgstr ""
+#: templates/settings.php:215
+msgid ""
+"Social media embeds that are included in your articles should also appear as "
+"part of the article in your Publisher Center. GN Publisher is designed to "
+"properly adjust the embeds for use in the Publisher Center. If your embeds "
+"don't appear as they should, please contact me through the GN Publisher "
+"support forum on WordPress.org"
+msgstr ""
+#: controllers/admin/class-gnpub-menu.php:92
+msgctxt "Text for GN Publisher plugin settings link"
+msgid "Settings & Tips"
+msgstr ""
+#: templates/settings.php:55
+msgid ""
+"The plugin addresses common issues publishers experience when using the "
+"Google News Publisher Center, including:"
+msgstr ""
+#: templates/settings.php:207
+msgid ""
+"The Publisher Center requires that large images be used as the featured "
+"image - at least 800px on the shortest side. GN Publisher will try to use "
+"your original image, which is generally the largest. If you upload a "
+"featured image that is smaller than 800px on its shortest side, it might not "
+"appear with the article in the Publisher Center."
+msgstr ""
+#: templates/settings.php:62
+msgid "Title errors (missing or repeated title)"
+msgstr ""
+#: templates/settings.php:269
+msgid ""
+"Want to optimize your site and grow your visibility on Google? Contact me at "
+"<a href=\"mailto:chris@andrews.com\">chris@andrews.com</a> for more "
+"information."
+msgstr ""
+#: templates/settings.php:90
+msgid ""
+"When setting up a new section in the Publisher Center, I recommend setting "
+"it up as a \"Feed\". For the \"Feed options\", select \"Generate articles "
+"from feed\". Under \"Rendering preference\", select \"Use website or AMP\". "
+"If you have AMP on your site, the Publisher Center will render the AMP "
+"version. If you do not have AMP available, the Publisher Center will usually "
+"generate your articles from the feed."
+msgstr ""
+#: templates/settings.php:240
+msgid "Where to get help!"
+msgstr ""
+#: templates/settings.php:88
+msgid ""
+"You are not required to use all of the feeds listed above. Just use the ones "
+"you want to include in your Publisher Center. Each feed will contain the "
+"thirty most recently updated articles in its category."
+msgstr ""
+#: templates/settings.php:260
+#, php-format
+msgid "You can also find help on my <a href=\"%1$s\">YouTube channel</a>."
+msgstr ""
+#: templates/settings.php:235
+msgid ""
+"You'll need to meet additional requirements in the Publisher Center, such as "
+"verifying your domain, selecting an appropriate publication name, and "
+"setting up your logos correctly."
+msgstr ""
