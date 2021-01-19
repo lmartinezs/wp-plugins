@@ -73,15 +73,15 @@
 </exec>
 <property name="phploc.done" value="true"/>
 </target>
-<target name="phploc-ci" unless="phploc.done" depends="prepare" description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
+<!--<target name="phploc-ci" unless="phploc.done" depends="prepare" description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
 <exec executable="${phploc}" taskname="phploc">
 <arg path="${basedir}/build/logs/phploc.csv"/>
-<arg value="--log-xml"/>
+<arg value="log-xml"/>
 <arg path="${basedir}/build/logs/phploc.xml"/>
 <arg path="${basedir}/amp-purge"/>
 </exec>
 <property name="phploc.done" value="true"/>
-</target>
+</target>-->
 <target name="pdepend" unless="pdepend.done" depends="prepare" description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
 <exec executable="${pdepend}" taskname="pdepend">
 <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>

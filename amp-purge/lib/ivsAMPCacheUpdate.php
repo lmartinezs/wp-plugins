@@ -71,7 +71,7 @@ class IVS_AMP_CACHE_UPDATE {
             $privateKeyFile = $this->getPemFilePath($file);
             
             if(!file_exists($privateKeyFile)) {
-                exit("Pem file not exists!");
+                error_log("Pem file not exists!");
             }
         }
         return true;
