@@ -110,6 +110,8 @@ do_action( 'rss_tag_pre', 'rss2' );
 				$content = preg_replace('/<\s*script.*?>.*?(<\s*\/script.*?>|$)/m', '', $content);
 				//replace iframe tags
 				$content = preg_replace('/<\s*iframe.*?>.*?(<\s*\/iframe.*?>|$)/m', '', $content);		
+				//remove style tag
+				$content = preg_replace('/style="[a-zA-Z0-9:%#;\.\s\(\)\-\,]*"/m', '', $content);
 			 ?>
 			<description><![CDATA[<?php echo $content; ?>]]></description>
 			
